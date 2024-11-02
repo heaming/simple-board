@@ -1,0 +1,15 @@
+## board
+### 게시글 전체 조회
+GET http://localhost:3000/board
+
+### 게시글 단건 조회
+GET http://localhost:3000/board/5
+
+### 게시글 생성
+POST http://localhost:3000/board
+Content-Type: application/json
+
+{
+  "name": "test#1010",
+  "contents": "post test"
+}
