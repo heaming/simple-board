@@ -7,22 +7,22 @@ export class BoardService {
     {
       id: 1,
       title: 'test#1',
-      content: 'content#1'
+      contents: 'content#1'
     },
     {
       id: 2,
       title: 'test#2',
-      content: 'content#2'
+      contents: 'content#2'
     },
     {
       id: 3,
       title: 'test#3',
-      content: 'content#3'
+      contents: 'content#3'
     },
     {
       id: 4,
       title: 'test#4',
-      content: 'content#4'
+      contents: 'content#4'
     },
   ];
 
@@ -31,7 +31,7 @@ export class BoardService {
   }
 
   findOne(id: number) {
-    const index = this.boards.findIndex(board => board.id === id);
+    const index = this.getBoardId(id);
     return this.boards[index];
   }
 
@@ -42,6 +42,35 @@ export class BoardService {
     };
     this.boards.push(newBoard);
     return newBoard;
+  }
+
+  update(id: number, data) {
+    const index = this.getBoardId(id);
+    if (index > -1) {
+      this.boards[index] = {
+        ...this.boards[index],
+        ...data,
+      };
+      return this.boards[index];
+    }
+
+    return null;
+  }
+
+  delete(id: number){
+    const index = this.getBoardId(id);
+
+    if(index > -1) {
+      const deletedBoard = this.boards[index];
+      this.boards.splice(index,1);
+      return deletedBoard;
+    }
+
+    return null;
+  }
+
+  getBoardId(id: number) {
+    return this.boards.findIndex((board) => board.id === id);
   }
 
   getNextId() {

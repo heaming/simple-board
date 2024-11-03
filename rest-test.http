@@ -3,13 +3,25 @@
 GET http://localhost:3000/board
 
 ### 게시글 단건 조회
-GET http://localhost:3000/board/5
+GET http://localhost:3000/board/4
 
 ### 게시글 생성
 POST http://localhost:3000/board
 Content-Type: application/json
 
 {
-  "name": "test#1010",
+  "title": "test#1010",
   "contents": "post test"
 }
+
+### 게시글 수정
+PUT http://localhost:3000/board/5
+Content-Type: application/json
+
+{
+  "title": "test#5-updated",
+  "contents": "put test"
+}
+
+### 게시글 삭제
+DELETE http://localhost:3000/board/3
