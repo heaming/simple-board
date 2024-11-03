@@ -1,6 +1,7 @@
-import { Controller, Get, Query } from "@nestjs/common";
+import { Controller, Get, HttpException, HttpStatus, Query } from '@nestjs/common';
 import { AppService } from "./app.service";
 import { Ip } from './decorators/ip.decorator';
+import * as http from 'node:http';
 
 @Controller()
 export class AppController {
@@ -8,8 +9,9 @@ export class AppController {
 
   @Get()
   getHello(@Ip() ip: string): string {
-    console.log(ip);
-    return this.appService.getHello();
+    // console.log(ip);
+    // return this.appService.getHello();
+    throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
   }
 
   @Get("name")
