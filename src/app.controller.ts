@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Logger, Query } from '@nestjs/common';
 import { AppService } from "./app.service";
 import { Ip } from './decorators/ip.decorator';
 import * as http from 'node:http';
@@ -7,11 +7,17 @@ import * as http from 'node:http';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  private readonly logger = new Logger(); // DI 불가
+
   @Get()
   getHello(@Ip() ip: string): string {
-    // console.log(ip);
-    // return this.appService.getHello();
-    throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
+    // this.logger.log("ip:"+ip);
+    // this.logger.debug("ip:"+ip);
+    // this.logger.error("ip:"+ip);
+    // this.logger.verbose("ip:"+ip);
+    // this.logger.warn("ip:"+ip);
+    return this.appService.getHello();
+    // throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
   }
 
   @Get("name")
