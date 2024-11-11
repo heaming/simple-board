@@ -1,4 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { User } from './user.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('board')
 export class Board {
@@ -17,4 +27,10 @@ export class Board {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ApiProperty({ description: '작성 유저' })
+  @ManyToOne(() => User)
+  @JoinColumn({name: 'user_id'})
+  user: User;
+
 }
